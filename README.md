@@ -1,8 +1,7 @@
-````md
 # SEO-Friendly Ecommerce Product Listing Page
 
 This project implements a **SEO-friendly Product Listing Page (PLP)** using **Next.js App Router**.  
-The goal of this assignment is to demonstrate **frontend engineering judgment**, with a focus on **SEO fundamentals, performance, accessibility, and scalable architecture**, rather than visual design.
+The goal is to demonstrate **frontend engineering judgment**, with a focus on **SEO fundamentals, performance, accessibility, and scalable architecture**, rather than visual design.
 
 ---
 
@@ -19,14 +18,6 @@ git clone https://github.com/<your-username>/ecommerce-plp.git
 cd ecommerce-plp
 npm install
 npm run dev
-````
-
-### Build for Production
-
-```bash
-npm run build
-npm start
-```
 
 ---
 
@@ -139,5 +130,3 @@ This project prioritizes:
 * Clear reasoning over SEO tricks
 
 The implementation focuses on **fundamentals that scale in real-world applications**.
-
-```
