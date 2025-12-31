@@ -1,8 +1,28 @@
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import { fetchProductBySlug } from '@/lib/api';
-import type { Product } from '@/data/products';
 import type { Metadata } from 'next';
+import type { Product } from '@/data/products';
+import { getAllProducts, getProductBySlug } from '@/lib/getProducts';
+
+type PageProps = {
+  params: Promise<{ slug: string }>;
+};
+
+export async function generateStaticParams() {
+  const products = await getAllProducts();
+
+  return products.map((product) => ({
+    slug: product.slug,
+  }));
+}
+
+async function getProduct(slug: string): Promise<Product> {
+  const product = await getProductBySlug(slug);
+  if (!product) {
+    notFound();
+  }
+  return product;
+}
 
 export async function generateMetadata(
   { params }: PageProps
@@ -21,20 +41,6 @@ export async function generateMetadata(
   };
 }
 
-type PageProps = {
-  params: Promise<{ slug: string }>;
-};
-
-async function getProduct(slug: string): Promise<Product> {
-  try {
-    return await fetchProductBySlug(slug);
-  } catch (error: any) {
-    if (error.message === 'NOT_FOUND') {
-      notFound();
-    }
-    throw error;
-  }
-}
 export default async function ProductPage({ params }: PageProps) {
   const { slug } = await params;
   const product = await getProduct(slug);

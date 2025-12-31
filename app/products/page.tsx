@@ -1,6 +1,6 @@
 import ProductGrid from '@/components/ProductGrid';
-import { fetchProducts } from '@/lib/api';
-import type { Metadata } from 'next';
+import { getAllProducts } from '@/lib/getProducts';
+import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Vitamins & Supplements | Health Store',
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 
 export default async function ProductsPage() {
-  const products = await fetchProducts();
+  const products = await getAllProducts();
   return (
     <main>
       <h1>Vitamins & Supplements</h1>
