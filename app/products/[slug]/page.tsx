@@ -1,25 +1,43 @@
-import { products } from '@/data/products';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
+import { fetchProductBySlug } from '@/lib/api';
+import type { Product } from '@/data/products';
+import type { Metadata } from 'next';
 
-export function generateStaticParams() {
-  return products.map((product) => ({
-    slug: product.slug,
-  }));
+export async function generateMetadata(
+  { params }: PageProps
+): Promise<Metadata> {
+  const { slug } = await params;
+  const product = await getProduct(slug);
+
+  return {
+    title: `${product.name} | Vitamins & Supplements`,
+    description: product.shortDescription,
+    openGraph: {
+      title: product.name,
+      description: product.shortDescription,
+      images: [product.image],
+    },
+  };
 }
 
-export default async function ProductPage({
-  params,
-}: {
+type PageProps = {
   params: Promise<{ slug: string }>;
-}) {
-  const { slug } = await params;
+};
 
-  const product = products.find((p) => p.slug === slug);
-
-  if (!product) {
-    notFound();
+async function getProduct(slug: string): Promise<Product> {
+  try {
+    return await fetchProductBySlug(slug);
+  } catch (error: any) {
+    if (error.message === 'NOT_FOUND') {
+      notFound();
+    }
+    throw error;
   }
+}
+export default async function ProductPage({ params }: PageProps) {
+  const { slug } = await params;
+  const product = await getProduct(slug);
 
   return (
     <main>
@@ -27,12 +45,14 @@ export default async function ProductPage({
 
       <Image
         src={product.image}
-        alt={product.name}
+        alt={`${product.name} supplement`}
         width={400}
         height={400}
+        priority
       />
 
       <p>{product.description}</p>
+
       <p>
         <strong>₹{product.price}</strong>
       </p>

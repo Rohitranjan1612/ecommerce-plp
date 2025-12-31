@@ -1,23 +1,27 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import { Product } from '@/data/products';
+import Image from "next/image";
+import Link from "next/link";
+import { Product } from "@/data/products";
 
 export default function ProductCard({ product }: { product: Product }) {
   return (
-    <article>
-      <Link href={`/products/${product.slug}`}>
-        <Image
-          src={product.image}
-          alt={product.name}
-          width={300}
-          height={300}
-          loading="lazy"
-        />
-        <h2>{product.name}</h2>
-      </Link>
+    <Link href={`/products/${product.slug}`}>
+      <article className="product-card">
+        <div className="product-image">
+          <Image
+            src={product.image}
+            alt={`${product.name} supplement`}
+            width={300}
+            height={300}
+            loading="lazy"
+          />
+        </div>
 
-      <p>{product.description}</p>
-      <p><strong>₹{product.price}</strong></p>
-    </article>
+        <h2 className="product-title">{product.name}</h2>
+
+        <p className="product-description">{product.shortDescription}</p>
+
+        <p className="product-price">₹{product.price}</p>
+      </article>
+    </Link>
   );
 }

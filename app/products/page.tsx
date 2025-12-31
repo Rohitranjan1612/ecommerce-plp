@@ -1,10 +1,13 @@
 import ProductGrid from '@/components/ProductGrid';
 import { fetchProducts } from '@/lib/api';
+import type { Metadata } from 'next';
 
-export const metadata = {
-  title: 'Vitamins & Supplements',
-  description: 'Browse our range of vitamins and supplements.',
+export const metadata: Metadata = {
+  title: 'Vitamins & Supplements | Health Store',
+  description:
+    'Browse high-quality vitamins and supplements to support immunity, heart health, and daily nutrition.',
 };
+
 
 export default async function ProductsPage() {
   const products = await fetchProducts();
