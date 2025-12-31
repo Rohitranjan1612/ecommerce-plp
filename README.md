@@ -18,6 +18,7 @@ git clone https://github.com/<your-username>/ecommerce-plp.git
 cd ecommerce-plp
 npm install
 npm run dev
+```
 
 ---
 
