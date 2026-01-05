@@ -14,7 +14,7 @@ The goal is to demonstrate **frontend engineering judgment**, with a focus on **
 ### Run Locally
 
 ```bash
-git clone https://github.com/<your-username>/ecommerce-plp.git
+git clone https://github.com/Rohitranjan1612/ecommerce-plp.git
 cd ecommerce-plp
 npm install
 npm run dev
